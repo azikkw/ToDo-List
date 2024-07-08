@@ -4,6 +4,10 @@ export default defineNuxtConfig({
   devtools: {
     enabled: true
   },
+  devServer: {
+    host: '0.0.0.0',
+    port: 3000
+  },
   modules: [
     '@nuxtjs/tailwindcss',
     '@nuxt/icon',
@@ -12,9 +16,9 @@ export default defineNuxtConfig({
   app: {
     head: {
       title: "To-Do List",
-      // link: [
-      //   { rel: 'icon', type: 'image/png', href: '/logo.png' }
-      // ],
+      link: [
+        { rel: 'icon', type: 'image/png', href: '/logo.png' }
+      ],
       htmlAttrs: {
         lang: 'en'
       },

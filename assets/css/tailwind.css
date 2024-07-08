@@ -1,3 +1,39 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@media (min-width: 1600px) {
+    .todo-back {
+        @apply w-[65%];
+    }
+    .folders li {
+        @apply 2xl:h-[45px] 2xl:text-lg;
+    }
+    .folders li span {
+        @apply size-[28px];
+    }
+    .todos-list .title {
+        @apply text-[27px];
+    }
+    .t-list {
+        @apply h-[calc(100%-125px)];
+    }
+    .t-list li {
+        @apply text-[18px] py-[15px];
+    }
+    .t-list p {
+        @apply mb-[2px]
+    }
+    .t-list li textarea {
+        @apply pt-[7px];
+    }
+    .todo-options span {
+        @apply size-[25px];
+    }
+    .add-task input {
+        @apply h-[50px] text-[17px];
+    }
+    .add-task button {
+        @apply h-[50px] text-[18px] w-[195px];
+    }
+}

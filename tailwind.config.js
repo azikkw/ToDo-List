@@ -15,9 +15,9 @@ export default {
         satoshi: ['Satoshi', 'sans-serif'],
       },
       backgroundImage: {
-        'back-color': 'linear-gradient(to bottom, #fff, #000)',
-      },
-    },
+        'back-color': 'linear-gradient(to bottom, #B2ACE2, #474A76)',
+      }
+    }
   },
   plugins: [],
 }
