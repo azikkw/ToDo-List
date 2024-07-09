@@ -29,9 +29,12 @@
             </div>
             <textarea v-show="index === editIndex" v-model="editText" @keydown="editTaskKeydown" />
             <div class="todo-options flex items-center gap-2">
-              <Icon v-show="index !== editIndex" @click="openEditTask(task, index)" name="material-symbols:edit-outline"/>
-              <Icon v-show="index === editIndex" @click="saveEditTask" name="material-symbols:check-rounded" class="-mb-0.5"/>
-              <Icon @click="removeTask(index)" name="material-symbols:delete-forever"/>
+<!--              <Icon v-show="index !== editIndex" @click="openEditTask(task, index)" name="ic:baseline-edit"/>-->
+<!--              <Icon v-show="index === editIndex" @click="saveEditTask" name="lets-icons:done-round" class="-mb-0.5"/>-->
+<!--              <Icon @click="removeTask(index)" name="ic:round-delete-forever"/>-->
+              <img v-show="index !== editIndex" @click="openEditTask(task, index)" src="/assets/icons/edit.svg" alt="edit"/>
+              <img v-show="index === editIndex" @click="saveEditTask" src="/assets/icons/save.svg" alt="save"/>
+              <img @click="removeTask(index)" src="/assets/icons/delete.svg" alt="delete"/>
             </div>
           </li>
         </ul>
@@ -58,7 +61,7 @@
           </li>
         </ul>
       </div>
-      <!-- Add task when max-w=768px -->
+      <!-- Add task when max-w=728px -->
       <div @click="toggleAddTask(false)" class="w-full h-full absolute top-0 left-0" :class="{'!hidden': !toggleAddTaskCond, '!flex': toggleAddTaskCond}"></div>
       <div class="add-task lg:!hidden" :class="{'!hidden': !toggleAddTaskCond, '!flex': toggleAddTaskCond}">
         <input class="z-[2]" ref="taskInput" type="text" v-model="todoText" @keydown="addTaskKeydown" placeholder="Enter task...." />
@@ -245,7 +248,7 @@
   .todo-checkbox:checked + span {
     @apply bg-[#805CF8] border-none;
   }
-  .todo-options span {
+  .todo-options img {
     @apply size-[25px] lg:size-[23px] opacity-65 transition-opacity duration-200 hover:opacity-100 cursor-pointer;
   }
   .add-task {
