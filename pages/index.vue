@@ -1,6 +1,6 @@
 <template>
-  <div class="background w-ful h-screen flex justify-center items-center font-satoshi">
-    <div :class="['todo-back bg-[#18181C] text-[#E1E2FC]', themeMode]">
+  <div class="background w-ful flex justify-center items-center font-satoshi">
+    <div :class="['todo-back bg-[#18181C] text-[#E1E2FC] relative', themeMode]">
       <!-- Navigation -->
       <div class="navigation bg-[#17171B]">
         <p class="font-bold text-3xl 2xl:text-[32px]">to<span class="text-[#805CF8]">do.</span></p>
@@ -29,9 +29,6 @@
             </div>
             <textarea v-show="index === editIndex" v-model="editText" @keydown="editTaskKeydown" />
             <div class="todo-options flex items-center gap-2">
-<!--              <Icon v-show="index !== editIndex" @click="openEditTask(task, index)" name="ic:baseline-edit"/>-->
-<!--              <Icon v-show="index === editIndex" @click="saveEditTask" name="lets-icons:done-round" class="-mb-0.5"/>-->
-<!--              <Icon @click="removeTask(index)" name="ic:round-delete-forever"/>-->
               <img v-show="index !== editIndex" @click="openEditTask(task, index)" src="/assets/icons/edit.svg" alt="edit"/>
               <img v-show="index === editIndex" @click="saveEditTask" src="/assets/icons/save.svg" alt="save"/>
               <img @click="removeTask(index)" src="/assets/icons/delete.svg" alt="delete"/>
@@ -61,6 +58,10 @@
           </li>
         </ul>
       </div>
+      <a class="w-full absolute left-0 bottom-0 py-[15px] text-[17px] flex justify-center items-center gap-2 bg-[#141418] opacity-65 hover:opacity-90 transition-opacity duration-200 font-medium lg:w-fit lg:bg-transparent lg:left-[30px] lg:bottom-[35px] lg:justify-start lg:py-0 lg:text-[16px]" href="https://github.com/azikkw/ToDo-List" target="_blank">
+        <img class="size-[32px] lg:size-[28px]" src="/assets/icons/github.svg" alt="github"/>
+        azikkw
+      </a>
       <!-- Add task when max-w=728px -->
       <div @click="toggleAddTask(false)" class="w-full h-full absolute top-0 left-0" :class="{'!hidden': !toggleAddTaskCond, '!flex': toggleAddTaskCond}"></div>
       <div class="add-task lg:!hidden" :class="{'!hidden': !toggleAddTaskCond, '!flex': toggleAddTaskCond}">
@@ -189,16 +190,19 @@
   }
 
   .background {
-    @apply bg-[#18181C] lg:bg-back-color;
+    @apply min-h-screen bg-[#18181C] lg:h-screen lg:bg-back-color;
   }
   .todo-back {
-    @apply w-full h-screen flex flex-col lg:w-[950px] lg:h-[80%] lg:flex-row lg:rounded-[20px];
+    @apply w-full min-h-screen flex justify-start items-start flex-col lg:w-[950px] lg:min-h-fit lg:h-[80%] lg:flex-row lg:rounded-[20px];
   }
   .navigation {
     @apply w-full relative pt-[20px] px-[15px] pb-[5px] lg:w-[30%] lg:h-full lg:rounded-l-[20px] lg:py-[35px] lg:px-[30px];
   }
   .todos-list {
-    @apply w-full h-full px-[15px] pt-[10px] pb-[15px] lg:w-[70%] lg:flex lg:flex-col lg:justify-between lg:px-[38px] lg:pt-[38px] lg:pb-[35px];
+    @apply w-full h-full mb-[60px] px-[15px] pt-[10px] pb-[20px] lg:w-[70%] lg:flex lg:flex-col lg:justify-between lg:px-[38px] lg:pt-[38px] lg:pb-[35px] lg:mb-0;
+  }
+  .todos-list .title {
+    @apply mb-[18px] lg:mb-0;
   }
   .folders {
     @apply mt-[12px] flex lg:block lg:mt-10;
@@ -212,17 +216,11 @@
   .folders li.active {
     @apply bg-[#2F2D36];
   }
-  .todos-list {
-    @apply h-full relative flex flex-col;
-  }
-  .todos-list .title {
-    @apply mb-[18px] lg:mb-0;
-  }
   .t-list {
-    @apply h-full lg:h-[calc(100%-110px)] lg:overflow-y-auto;;
+    @apply lg:h-[calc(100%-110px)] lg:overflow-y-auto;;
   }
   .t-list.complete {
-    @apply h-full lg:h-[calc(100%-55px)];
+    @apply lg:h-[calc(100%-55px)];
   }
   .t-list::-webkit-scrollbar {
     @apply w-0 lg:w-[5px];
