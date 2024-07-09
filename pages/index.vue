@@ -54,7 +54,7 @@
               <p class="flex-1">{{task}}</p>
             </div>
             <div class="todo-options flex items-center gap-2">
-              <img @click="removeTask(index)" src="/assets/icons/delete.svg" alt="delete"/>
+              <img @click="removeCompleteTask(index)" src="/assets/icons/delete.svg" alt="delete"/>
             </div>
           </li>
         </ul>
