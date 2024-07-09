@@ -29,7 +29,7 @@
             </div>
             <textarea v-show="index === editIndex" v-model="editText" @keydown="editTaskKeydown" />
             <div class="todo-options flex items-center gap-2">
-              <Icon v-show="index !== editIndex" @click="openEditTask(task, index)" name="mdi:pencil"/>
+              <Icon v-show="index !== editIndex" @click="openEditTask(task, index)" name="ic:baseline-edit"/>
               <Icon v-show="index === editIndex" @click="saveEditTask" name="lets-icons:done-round" class="-mb-0.5"/>
               <Icon @click="removeTask(index)" name="ic:round-delete-forever"/>
             </div>

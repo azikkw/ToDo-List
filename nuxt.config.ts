@@ -30,9 +30,9 @@ export default defineNuxtConfig({
       ]
     }
   },
-  // css: [
-  //   '~/assets/css/tailwind.css',
-  // ],
+  css: [
+    '~/assets/css/tailwind.css',
+  ],
   image: {
     dir: 'assets/images'
   }
