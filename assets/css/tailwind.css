@@ -2,6 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Styles for big screens */
 @media (min-width: 1600px) {
     .todo-back {
         @apply w-[65%];

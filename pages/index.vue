@@ -1,10 +1,10 @@
 <template>
   <div class="background w-ful flex justify-center items-center font-satoshi">
-    <div :class="['todo-back bg-[#18181C] text-[#E1E2FC] relative', themeMode]">
+    <div class="todo-back bg-[#18181C] text-[#E1E2FC] relative">
       <!-- Navigation -->
       <div class="navigation bg-[#17171B]">
         <p class="font-bold text-3xl 2xl:text-[32px]">to<span class="text-[#805CF8]">do.</span></p>
-        <ul :class="['folders', isActive]">
+        <ul class="folders">
           <li @click="navTo('tasks')" :class="{'active': isActive === 'tasks'}"><Icon name="fluent:mail-inbox-20-regular" size="25"/> Tasks</li>
           <li @click="navTo('complete')" :class="{'active': isActive === 'complete'}"><Icon name="material-symbols-light:done-all-rounded" size="25"/> Complete</li>
         </ul>
@@ -40,6 +40,7 @@
           <button @click="addTask" aria-label="Add task btn">Add Task</button>
         </div>
       </div>
+      <!-- Complete to-do's list -->
       <div v-else class="todos-list !block">
         <p class="title font-bold text-[#898BCC] text-2xl lg:!mb-[20px]">Complete Tasks</p>
         <ul class="t-list complete">
@@ -58,6 +59,7 @@
           </li>
         </ul>
       </div>
+      <!-- GitHub link -->
       <a class="w-full absolute left-0 bottom-0 py-[15px] text-[17px] flex justify-center items-center gap-2 bg-[#141418] opacity-65 hover:opacity-90 transition-opacity duration-200 font-medium lg:w-fit lg:bg-transparent lg:left-[30px] lg:bottom-[35px] lg:justify-start lg:py-0 lg:text-[16px]" href="https://github.com/azikkw/ToDo-List" target="_blank">
         <img class="size-[32px] lg:size-[28px]" src="/assets/icons/github.svg" alt="github"/>
         azikkw
@@ -74,8 +76,6 @@
 
 <script setup>
 
-  const themeMode = ref(null);
-
   const tasks = ref([]);
   const completeTasks = ref([]);
 
@@ -88,11 +88,11 @@
   const toggleAddTaskCond = ref(false);
   const taskInput = ref(null);
 
-  onMounted( () => {
+  onMounted(() => {
     getTasks();
   });
 
-  // Navigation
+  // Navigation between tasks and complete task
   const navTo = (to) => {
     if(to === 'tasks') isActive.value = to;
     else isActive.value = to;
@@ -100,32 +100,40 @@
 
   // Add Task
   const addTask = () => {
+    // Checking task length more than 0
     if(todoText.value.length > 0) {
       tasks.value.push(todoText.value);
       localStorage.setItem("todoList", JSON.stringify(tasks.value));
       todoText.value = '';
+
+      // Close addTask window for tablets and phones when task added
       toggleAddTaskCond.value = false
     }
   }
   // Add Task func. if user pressed Enter
   const addTaskKeydown = (event) => {
+    // checking for Enter key
     if(event.key === 'Enter') {
       addTask();
     }
   }
+  // Opening AddTask window when user click to add btn
   const toggleAddTask = async (condition) => {
     if(condition) {
       toggleAddTaskCond.value = true;
-      await nextTick()
-      taskInput.value.focus();
+      // Focusing on input
+      await nextTick();
+      taskInput?.value.focus();
     }
     else toggleAddTaskCond.value = false;
   }
 
-  // Get Tasks
+  // Get Tasks from local storage
   const getTasks = () => {
+    // Getting tasks
     if(localStorage.getItem("todoList") !== null)
       tasks.value = JSON.parse(localStorage.getItem("todoList"));
+    // Getting complete tasks
     if(localStorage.getItem("completeList") !== null)
       completeTasks.value = JSON.parse(localStorage.getItem("completeList"));
   }
@@ -135,9 +143,11 @@
     array.splice(index, 1);
     localStorage.setItem(storageKey, JSON.stringify(array));
   }
+  // From tasks list
   const removeTask = (id) => {
     removeItem(tasks.value, id, "todoList");
   }
+  // From complete tasks list
   const removeCompleteTask = (id) => {
     removeItem(completeTasks.value, id, "completeList");
   }
@@ -149,16 +159,18 @@
     completeTasks.value.push(task);
     localStorage.setItem("completeList", JSON.stringify(completeTasks.value));
 
+    // Remove task from tasks list
     removeTask(id);
   }
 
-  // Recover task
+  // Recover task from complete tasks list
   const recoverTask = (id) => {
     const task = completeTasks.value[id];
 
     tasks.value.push(task);
     localStorage.setItem("todoList", JSON.stringify(tasks.value));
 
+    // Remove task from complete tasks list
     removeCompleteTask(id);
   }
 
@@ -168,11 +180,13 @@
     editIndex.value = id;
     editText.value = task;
   }
+  // Saving edited task
   const saveEditTask = () => {
     tasks.value[editIndex.value] = editText.value;
     localStorage.setItem("todoList", JSON.stringify(tasks.value));
     editIndex.value = null;
   }
+  // Saving edited task when Enter pressed
   const editTaskKeydown = (event) => {
     if(event.key === 'Enter') {
       saveEditTask();
@@ -189,20 +203,17 @@
     src: url("/assets/fonts/Satoshi-Variable.ttf");
   }
 
+  /* Background styles */
   .background {
     @apply min-h-screen bg-[#18181C] lg:h-screen lg:bg-back-color;
   }
+  /* To-Do window back styles */
   .todo-back {
     @apply w-full min-h-screen flex justify-start items-start flex-col lg:w-[950px] lg:min-h-fit lg:h-[80%] lg:flex-row lg:rounded-[20px];
   }
+  /* Navigation styles */
   .navigation {
     @apply w-full relative pt-[20px] px-[15px] pb-[5px] lg:w-[30%] lg:h-full lg:rounded-l-[20px] lg:py-[35px] lg:px-[30px];
-  }
-  .todos-list {
-    @apply w-full h-full mb-[60px] px-[15px] pt-[10px] pb-[20px] lg:w-[70%] lg:flex lg:flex-col lg:justify-between lg:px-[38px] lg:pt-[38px] lg:pb-[35px] lg:mb-0;
-  }
-  .todos-list .title {
-    @apply mb-[18px] lg:mb-0;
   }
   .folders {
     @apply mt-[12px] flex lg:block lg:mt-10;
@@ -216,10 +227,19 @@
   .folders li.active {
     @apply bg-[#2F2D36];
   }
+  /* To-Do lists styles */
+  .todos-list {
+    @apply w-full h-full mb-[60px] px-[15px] pt-[10px] pb-[20px] lg:w-[70%] lg:flex lg:flex-col lg:justify-between lg:px-[38px] lg:pt-[38px] lg:pb-[35px] lg:mb-0;
+  }
+  .todos-list .title {
+    @apply mb-[18px] lg:mb-0;
+  }
   .t-list {
+    /* Tasks list styles */
     @apply lg:h-[calc(100%-110px)] lg:overflow-y-auto;;
   }
   .t-list.complete {
+    /* Complete task list styles */
     @apply lg:h-[calc(100%-55px)];
   }
   .t-list::-webkit-scrollbar {
@@ -237,18 +257,22 @@
   .t-list li:last-child {
     @apply mb-0;
   }
+  /* Editing textarea styles */
   .t-list li textarea {
     @apply w-[calc(100%-134px)] h-[calc(100%-15px)] absolute left-0 bg-[#2F2D36] ml-[38px] px-[6px] pt-[7px] border border-[#69647A] rounded-[5px] resize-none focus:outline-none lg:pt-[3.5px];
   }
+  /* Checkbox styles */
   .todo-checkbox + span {
     @apply !w-[16px] !h-[16px] bg-transparent rounded-[50%] border border-white;
   }
   .todo-checkbox:checked + span {
     @apply bg-[#805CF8] border-none;
   }
+  /* To-Do options styles */
   .todo-options img {
     @apply size-[25px] lg:size-[23px] opacity-65 transition-opacity duration-200 hover:opacity-100 cursor-pointer;
   }
+  /* Add task styles */
   .add-task {
     @apply z-[1] absolute left-0 bottom-0 w-full h-[68%] flex items-center flex-col gap-[10px] bg-[#141418] rounded-t-[12px] py-7 px-[15px] lg:relative lg:p-0 lg:h-fit lg:bg-transparent;
   }
