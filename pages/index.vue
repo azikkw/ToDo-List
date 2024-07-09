@@ -54,7 +54,7 @@
               <p class="flex-1">{{task}}</p>
             </div>
             <div class="todo-options flex items-center gap-2">
-              <Icon @click="removeCompleteTask(index)" name="ic:round-delete-forever" size="23px"/>
+              <img @click="removeTask(index)" src="/assets/icons/delete.svg" alt="delete"/>
             </div>
           </li>
         </ul>
