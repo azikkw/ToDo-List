@@ -1,6 +1,8 @@
-# Nuxt 3 Minimal Starter
+# To-Do List
 
-Look at the [Nuxt 3 documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+![Banner](/assets/images/readme-banner.png)
+
+[//]: # (Look at the [Nuxt 3 documentation]&#40;https://nuxt.com/docs/getting-started/introduction&#41; to learn more.)
 
 ## Setup
 
