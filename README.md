@@ -30,12 +30,12 @@ git clone https://github.com/azikkw/ToDo-List.git
 
 You can also [download ZIP archive](https://github.com/azikkw/ToDo-List/archive/refs/heads/main.zip) and unpack it to the folder you want.
 
-#### 2. Building the project with `Docker 🐋`
+#### 2. Building the project with Docker 🐋
 ```bash
 make build
 ```
 
-#### 3. Building the project with `Package Manager`
+#### 3. Building the project with Package Manager
 Since the project does not contain all the necessary dependencies, you will need to install them.
 
 To do this, you need to enter the following command:
@@ -56,7 +56,7 @@ bun install
 
 After completing all the steps described in the instructions, you can run the project in two ways:
 
-#### 1. Using Docker 🐋
+#### 1. If you built it using Docker 🐋
 ```bash
 # To run:
 make run
@@ -66,7 +66,7 @@ make run
 make stop
 ```
 
-#### 2. Using package manager
+#### 2. If you built it using Package Manager
 ```bash
 # For npm package manager
 npm run dev
