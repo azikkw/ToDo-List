@@ -2,17 +2,61 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Custom font-family */
+@font-face {
+    font-family: Satoshi;
+    src: url("/assets/fonts/Satoshi-Variable.ttf");
+}
+
+body {
+    @apply bg-[#18181C] font-satoshi;
+}
+
+.title {
+    @apply font-bold text-[#898BCC] text-2xl;
+}
+
+/* To-Do lists styles */
+.todos-list {
+    @apply w-full h-full mb-[60px] px-[15px] pt-[10px] pb-[20px] lg:w-[70%] lg:flex lg:flex-col lg:justify-between lg:px-[38px] lg:pt-[38px] lg:pb-[35px] lg:mb-0;
+}
+.todos-list .title {
+    @apply mb-[18px] lg:mb-0;
+}
+.t-list {
+    @apply pb-10 lg:pb-0;
+}
+.t-list::-webkit-scrollbar {
+    @apply w-0 lg:w-[5px];
+}
+.t-list::-webkit-scrollbar-track {
+    @apply bg-transparent;
+}
+.t-list::-webkit-scrollbar-thumb {
+    @apply bg-[#898BCC] rounded-[3px];
+}
+.t-list li {
+    @apply relative w-full h-fit bg-[#2F2D36] font-normal flex justify-between items-center px-4 py-[15px] rounded-lg gap-[20px] mb-[10px] lg:py-[12px];
+}
+.t-list li:last-child {
+    @apply mb-0;
+}
+.todo-checkbox + span {
+    @apply !w-[16px] !h-[16px] bg-transparent rounded-[50%] border border-white;
+}
+.todo-checkbox:checked + span {
+    @apply bg-[#805CF8] border-none;
+}
+/* To-Do options styles */
+.todo-options {
+    @apply flex items-center gap-2;
+}
+.todo-options img {
+    @apply size-[25px] lg:size-[23px] opacity-65 transition-opacity duration-200 hover:opacity-100 cursor-pointer;
+}
+
 /* Styles for big screens */
 @media (min-width: 1600px) {
-    .todo-back {
-        @apply w-[65%];
-    }
-    .folders li {
-        @apply 2xl:h-[45px] 2xl:text-lg;
-    }
-    .folders li span {
-        @apply size-[28px];
-    }
     .todos-list .title {
         @apply text-[27px];
     }
@@ -25,16 +69,7 @@
     .t-list p {
         @apply mb-[2px]
     }
-    .t-list li textarea {
-        @apply pt-[7px];
-    }
-    .todo-options span {
-        @apply size-[25px];
-    }
-    .add-task input {
-        @apply h-[50px] text-[17px];
-    }
-    .add-task button {
-        @apply h-[50px] text-[18px] w-[195px];
+    .todo-options img {
+        @apply size-[28px];
     }
 }

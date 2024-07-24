@@ -26,10 +26,6 @@ export default defineNuxtConfig({
         {
           name: 'description',
           content: 'Keep organized and increase productivity with our easy-to-use To-Do list. It is ideal for managing daily tasks and achieving your goals.'
-        },
-        {
-          name: 'viewport',
-          content: 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no'
         }
       ]
     }

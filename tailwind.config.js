@@ -12,10 +12,10 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        satoshi: ['Satoshi', 'sans-serif'],
+        satoshi: ['Satoshi', 'sans-serif']
       },
       backgroundImage: {
-        'back-color': 'linear-gradient(to bottom, #B2ACE2, #474A76)',
+        'back-color': 'linear-gradient(to bottom, #B2ACE2, #474A76)'
       }
     }
   },
