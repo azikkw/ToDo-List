@@ -12,6 +12,13 @@ You can access `To-Do List` by this link:
 
 ---
 
+## 📱 FUNCTIONALITY
+#### In To-Do List user can:
+1. Add tasks and edit, remove and complete them
+2. Complete task and see, recover and remove them in completed task
+
+---
+
 ## 📝 PREPARING FOR IMPORTING
 #### To start importing a project `If you want to run it without docker`, you need to:
 [Node.js](https://nodejs.org/en) version 18.0.0 [min] and more.
